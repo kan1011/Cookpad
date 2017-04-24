@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424114043) do
+ActiveRecord::Schema.define(version: 20170424124558) do
+
+  create_table "uploaders", force: :cascade do |t|
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "uploaded_image_file_name"
+    t.string   "uploaded_image_content_type"
+    t.integer  "uploaded_image_file_size"
+    t.datetime "uploaded_image_updated_at"
+    t.integer  "user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

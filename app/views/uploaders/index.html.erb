@@ -1,0 +1,37 @@
+<% if current_user %>
+  <%= link_to new_uploader_path, class: "btn btn-danger" do %>
+  <%= icon('plus') %> Image
+  <% end %>
+  <% else %>
+  <p> You need to sign in before uploading image </p>
+  <% end %>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Image</th>
+        <% if current_user %>
+          <th>Action</th>
+      <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @uploaders.each do |uploader| %>
+        <tr>
+        <td><%= uploader.id %></td>
+        <td><%= image_tag uploader.uploaded_image(:thumb) %></td>
+        <td>
+          <% if current_user %>
+            <% if current_user.id == uploader.user_id %>
+            <%= link_to('Delete', uploader_path(uploader), method: :delete) %>
+        <% else %>
+          <p> You are not the uploader</p>
+        <% end %>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
